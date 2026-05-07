@@ -1,18 +1,24 @@
 import { useEffect } from "react";
 import { eventBus } from "./events/eventBus";
+import { InputBox } from "./chat/components/InputBox";
 
 export default function App() {
   useEffect(() => {
-    const unsubscribe = eventBus.on("AI_END", (payload) => {
-      console.log(payload.tone);
-    });
-
-    eventBus.emit("AI_END", {
-      tone: "neutral",
+    const unsubscribe = eventBus.on("BLOCK_START", (payload) => {
+      console.log(payload.type);
     });
 
     return unsubscribe;
   }, []);
 
-  return <div>EventBus Test</div>;
+  return (
+    <div>
+      <h1>EventBus Test</h1>
+      <InputBox onSend={handleSend} disabled={false} />
+    </div>
+  );
+}
+
+function handleSend(text: string) {
+  eventBus.emit("BLOCK_START", { type: text });
 }

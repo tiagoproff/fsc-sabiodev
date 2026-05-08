@@ -1,19 +1,19 @@
-export type TextBlock = {
+type Block = {
   id: string;
+  content: string;
+};
+
+export type TextBlockType = Block & {
   type: "text";
-  content: string;
 };
 
-export type CodeBlock = {
-  id: string;
+export type CodeBlockType = Block & {
   type: "code";
-  content: string;
 };
 
-export type ListBlock = {
-  id: string;
+export type ListBlockType = Omit<Block, "content"> & {
   type: "list";
-  items: string[];
+  content: string[];
 };
 
-export type Block = TextBlock | CodeBlock | ListBlock;
+export type BlockType = TextBlockType | CodeBlockType | ListBlockType;

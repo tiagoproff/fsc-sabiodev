@@ -1,11 +1,14 @@
-interface ListBlockProps {
-  readonly items: string[];
-}
+import { useEffect } from "react";
+import type { ListBlockComponent } from "../../types/blockComponent.types";
 
-export function ListBlock({ items }: ListBlockProps) {
+export function ListBlock({ content, onComplete }: ListBlockComponent) {
+  useEffect(() => {
+    onComplete?.();
+  }, [onComplete]);
+
   return (
     <ul>
-      {items.map((item, index) => {
+      {content.map((item, index) => {
         const itemId = `list-item-${index}`;
 
         if (!item) return null;

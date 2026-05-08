@@ -1,8 +1,10 @@
 import { useEffect } from "react";
 
-import { BlockRenderer } from "./blocks/components/BlockRenderer";
 import { useBlockController } from "./blocks/controller/useBlockController";
 import { markdownToBlocks } from "./blocks/parser/markdownToBlocks";
+import { MessageList } from "./chat/components/MessageList";
+import { createId } from "./shared/utils/createId";
+import type { Message } from "./chat/types/message.types";
 
 const markdown = `
 Olá viajante.
@@ -21,17 +23,37 @@ const wisdom = true;
 export default function App() {
   const { visibleBlocks, start, onBlockComplete } = useBlockController();
 
+  const userId = createId();
+  const assistantId = createId();
+  const userBlockId = createId();
+
+  const messages: Message[] = [
+    {
+      id: userId,
+      role: "user",
+      blocks: [
+        {
+          id: userBlockId,
+          type: "text",
+          content: "Como evitar rerender?",
+        },
+      ],
+    },
+    {
+      id: assistantId,
+      role: "assistant",
+      blocks: visibleBlocks,
+    },
+  ];
+
   useEffect(() => {
-    const blocks = markdownToBlocks(markdown);
-
-    start(blocks);
-
-    return () => {};
+    const assistantBlocks = markdownToBlocks(markdown);
+    start(assistantBlocks);
   }, [start]);
 
   return (
     <div>
-      <BlockRenderer blocks={visibleBlocks} onBlockComplete={onBlockComplete} />
+      <MessageList messages={messages} onBlockComplete={onBlockComplete} />
     </div>
   );
 }

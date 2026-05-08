@@ -20,13 +20,22 @@ export function InputBox({
     if (textTrimmed.trim() == "") return;
 
     onSend(textTrimmed);
+
+    setText("");
   };
+
+  function handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
+    if (event.key === "Enter") {
+      handleSend(event as unknown as React.MouseEvent<HTMLButtonElement>);
+    }
+  }
 
   return (
     <div>
       <input
         value={text}
         onChange={(e) => setText(e.target.value)}
+        onKeyDown={handleKeyDown}
         {...props}
       />
       <button disabled={disabled} onClick={handleSend}>

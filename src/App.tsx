@@ -1,8 +1,9 @@
-import { useEffect } from "react";
+import { useState } from "react";
 
-import { useBlockController } from "./blocks/controller/useBlockController";
+//import { useBlockController } from "./blocks/controller/useBlockController";
 import { markdownToBlocks } from "./blocks/parser/markdownToBlocks";
 import { MessageList } from "./chat/components/MessageList";
+import { InputBox } from "./chat/components/InputBox";
 import { createId } from "./shared/utils/createId";
 import type { Message } from "./chat/types/message.types";
 
@@ -21,39 +22,45 @@ const wisdom = true;
 `;
 
 export default function App() {
-  const { visibleBlocks, start, onBlockComplete } = useBlockController();
+  const [messages, setMessages] = useState<Message[]>([]);
+  //const { visibleBlocks, start, onBlockComplete } = useBlockController();
 
   const userId = createId();
   const assistantId = createId();
   const userBlockId = createId();
 
-  const messages: Message[] = [
-    {
+  function handleSend(text: string) {
+    const userMessage: Message = {
       id: userId,
       role: "user",
       blocks: [
         {
           id: userBlockId,
           type: "text",
-          content: "Como evitar rerender?",
+          content: text,
         },
       ],
-    },
-    {
+    };
+
+    setMessages((prev) => [...prev, userMessage]);
+
+    const assistantBlocks = markdownToBlocks(markdown);
+
+    //start(assistantBlocks);
+
+    const assistantMessage: Message = {
       id: assistantId,
       role: "assistant",
-      blocks: visibleBlocks,
-    },
-  ];
+      blocks: assistantBlocks,
+    };
 
-  useEffect(() => {
-    const assistantBlocks = markdownToBlocks(markdown);
-    start(assistantBlocks);
-  }, [start]);
+    setMessages((prev) => [...prev, assistantMessage]);
+  }
 
   return (
     <div>
-      <MessageList messages={messages} onBlockComplete={onBlockComplete} />
+      <MessageList messages={messages} />
+      <InputBox onSend={handleSend} />
     </div>
   );
 }

@@ -4,10 +4,9 @@ import type { Message } from "../types/message.types";
 
 type MessageListProps = {
   readonly messages: Message[];
-  readonly onBlockComplete: () => void;
 };
 
-export function MessageList({ messages, onBlockComplete }: MessageListProps) {
+export function MessageList({ messages }: MessageListProps) {
   return (
     <div>
       {messages.map((message) => {
@@ -15,13 +14,7 @@ export function MessageList({ messages, onBlockComplete }: MessageListProps) {
           return <UserMessage key={message.id} message={message} />;
         }
 
-        return (
-          <AssistantMessage
-            key={message.id}
-            message={message}
-            onBlockComplete={onBlockComplete}
-          />
-        );
+        return <AssistantMessage key={message.id} message={message} />;
       })}
     </div>
   );

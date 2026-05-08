@@ -1,24 +1,54 @@
 import { useEffect } from "react";
-import { eventBus } from "./events/eventBus";
-import { InputBox } from "./chat/components/InputBox";
+import { BlockRenderer } from "./blocks/components/BlockRenderer";
+import { useBlockController } from "./blocks/controller/useBlockController";
+import type { BlockType } from "./blocks/types/block.types";
+
+const blocks: BlockType[] = [
+  {
+    id: "1",
+    type: "text",
+    content: "Olá viajante.",
+  },
+
+  {
+    id: "2",
+    type: "text",
+    content:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+  },
+
+  {
+    id: "3",
+    type: "text",
+    content:
+      "Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.",
+  },
+
+  {
+    id: "4",
+    type: "list",
+    content: ["Use cache", "Evite rerender"],
+  },
+
+  {
+    id: "5",
+    type: "code",
+    content: "const wisdom = true;",
+  },
+];
 
 export default function App() {
-  useEffect(() => {
-    const unsubscribe = eventBus.on("BLOCK_START", (payload) => {
-      console.log(payload.type);
-    });
+  const { visibleBlocks, start, onBlockComplete } = useBlockController();
 
-    return unsubscribe;
-  }, []);
+  useEffect(() => {
+    start(blocks);
+
+    return () => {};
+  }, [start]);
 
   return (
     <div>
-      <h1>EventBus Test</h1>
-      <InputBox onSend={handleSend} disabled={false} />
+      <BlockRenderer blocks={visibleBlocks} onBlockComplete={onBlockComplete} />
     </div>
   );
-}
-
-function handleSend(text: string) {
-  eventBus.emit("BLOCK_START", { type: text });
 }

@@ -1,42 +1,44 @@
-import { useCallback, useEffect, useRef, useState } from "react";
-
+import { useCallback, useState } from "react";
 import { PixiAvatarAdapter } from "../adapters/pixi.adapter";
+
 import type { AvatarState } from "../types/avatar.types";
 import type { AvatarController } from "../types/avatarController.types";
+
+const adapter = new PixiAvatarAdapter();
 
 export function useAvatarController(): AvatarController {
   const [state, setState] = useState<AvatarState>("idle");
 
-  const adapterRef = useRef(new PixiAvatarAdapter());
+  const mount = useCallback((container: HTMLElement) => {
+    adapter.mount(container);
+  }, []);
 
-  const updateState = useCallback((nextState: AvatarState) => {
-    setState(nextState);
-
-    adapterRef.current.setState(nextState);
+  const destroy = useCallback(() => {
+    adapter.destroy();
   }, []);
 
   const setIdle = useCallback(() => {
-    updateState("idle");
-  }, [updateState]);
+    setState("idle");
+
+    adapter.setState("idle");
+  }, []);
 
   const setThinking = useCallback(() => {
-    updateState("thinking");
-  }, [updateState]);
+    setState("thinking");
+
+    adapter.setState("thinking");
+  }, []);
 
   const setTalking = useCallback(() => {
-    updateState("talking");
-  }, [updateState]);
+    setState("talking");
 
-  useEffect(() => {
-    const adapter = adapterRef.current;
-
-    return () => {
-      adapter.destroy();
-    };
+    adapter.setState("loose" as AvatarState);
   }, []);
 
   return {
     state,
+    mount,
+    destroy,
     setIdle,
     setThinking,
     setTalking,

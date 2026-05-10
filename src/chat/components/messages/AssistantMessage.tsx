@@ -6,11 +6,15 @@ import type { Message } from "../../../chat/types/message.types";
 
 type AssistantMessageProps = {
   readonly message: Message;
+  readonly onComplete: () => void;
 };
 
 const BLOCK_DELAY = 300;
 
-function AssistantMessageComponent({ message }: AssistantMessageProps) {
+function AssistantMessageComponent({
+  message,
+  onComplete,
+}: AssistantMessageProps) {
   const queueRef = useRef<BlockType[]>([]);
   const currentIndexRef = useRef(0);
   const [renderedBlocks, setRenderedBlocks] = useState<BlockType[]>(() => {
@@ -24,6 +28,8 @@ function AssistantMessageComponent({ message }: AssistantMessageProps) {
     const nextBlock = queueRef.current[nextIndex];
 
     if (!nextBlock) {
+      onComplete();
+
       return;
     }
 

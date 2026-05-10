@@ -15,6 +15,7 @@ export function InputBox({
   const [text, setText] = useState("");
   const chat = useChat();
   const isIdle = chat.status === "idle";
+  const isDisabled = !isIdle;
   const buttonLabel = isIdle ? "Enviar" : "Stop";
 
   const handleSend = () => {
@@ -47,12 +48,14 @@ export function InputBox({
     <div>
       <input
         value={text}
-        disabled={!isIdle}
+        disabled={isDisabled}
         onChange={(event) => setText(event.target.value)}
         onKeyDown={handleKeyDown}
         {...props}
       />
-      <button onClick={handleClick}>{buttonLabel}</button>
+      <button disabled={isDisabled} onClick={handleClick}>
+        {buttonLabel}
+      </button>
     </div>
   );
 }

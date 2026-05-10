@@ -14,7 +14,7 @@ export function Typing({ text, speed = 120, onComplete }: TypingProps) {
 
     let index = 0;
     let current = "";
-    let timeoutId: number;
+    let timeoutId: ReturnType<typeof setTimeout>;
 
     function type() {
       if (index >= words.length) {

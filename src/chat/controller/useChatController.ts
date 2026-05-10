@@ -2,9 +2,9 @@ import { useCallback, useState } from "react";
 
 import { useAvatar } from "../../avatar/context/AvatarContext";
 import { useChat } from "../context/ChatContext";
-import { askAssistant } from "../service/chatService";
 import { markdownToBlocks } from "../../blocks/parser/markdownToBlocks";
 import { createId } from "../../shared/utils/createId";
+import { askAI } from "../../ai/services/ai.service";
 
 import type { Message } from "../types/message.types";
 
@@ -42,7 +42,17 @@ export function useChatController() {
       chat.setThinking();
       avatar.setThinking();
 
-      const markdown = await askAssistant(text);
+      const response = await askAI([
+        {
+          role: "system",
+          content: "Você é um avatar amigável.",
+        },
+
+        {
+          role: "user",
+          content: text,
+        },
+      ]);
 
       chat.setResponding();
       avatar.setTalking();
@@ -50,7 +60,7 @@ export function useChatController() {
       const assistantMessage: Message = {
         id: createId(),
         role: "assistant",
-        blocks: markdownToBlocks(markdown),
+        blocks: markdownToBlocks(response),
       };
 
       setMessages((prev) => [...prev, assistantMessage]);

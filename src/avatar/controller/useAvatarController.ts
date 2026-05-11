@@ -32,7 +32,7 @@ export function useAvatarController(): AvatarController {
   const setTalking = useCallback(() => {
     setState("talking");
 
-    adapter.setState("loose" as AvatarState);
+    adapter.setState("talking");
   }, []);
 
   return {

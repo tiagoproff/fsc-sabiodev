@@ -1,4 +1,4 @@
-# 🧙 SabioDev
+# <img src="./public/sabiodev.png" width="50" /> SabioDev
 
 > O único assistente virtual que responde suas dúvidas enquanto julga silenciosamente seu código.
 
@@ -296,3 +296,11 @@ Uso comercial é permitido desde que os créditos sejam preservados.
 Porque até os magos do código merecem reconhecimento.
 
 Só não culpe o SabioDev por commits feitos às 3 da manhã.
+
+---
+
+# 📄 Termos de uso
+
+Este projeto possui termos de uso específicos.
+
+Leia aqui: [LICENSE.md](LICENSE.md)

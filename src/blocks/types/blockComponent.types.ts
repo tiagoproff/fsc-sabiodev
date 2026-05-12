@@ -6,7 +6,7 @@ import type {
 
 export type BlockComponentBase = {
   onComplete: () => void;
-};
+} & Omit<React.HTMLAttributes<HTMLElement>, "content">;
 
 export type TextBlockComponent = TextBlockType & BlockComponentBase;
 export type CodeBlockComponent = CodeBlockType & BlockComponentBase;

@@ -5,14 +5,17 @@ import { CodeBlock } from "./blocks/CodeBlock";
 import { ListBlock } from "./blocks/ListBlock";
 import type { BlockType } from "../types/block.types";
 
+type BlockStyles = Record<"root" | BlockType["type"], CSSModuleClasses[string]>;
+
 type BlockRendererProps = {
   readonly blocks: BlockType[];
-
+  readonly blockStyles: BlockStyles;
   readonly onBlockComplete: () => void;
 };
 
 export const BlockRenderer = memo(function ({
   blocks,
+  blockStyles,
   onBlockComplete,
 }: BlockRendererProps) {
   const handleComplete = () => {
@@ -21,7 +24,7 @@ export const BlockRenderer = memo(function ({
   };
 
   return (
-    <div>
+    <div className={blockStyles.root}>
       {blocks.map((block) => {
         switch (block.type) {
           case "text":
@@ -29,6 +32,7 @@ export const BlockRenderer = memo(function ({
               <TextBlock
                 key={block.id}
                 {...block}
+                className={blockStyles.text}
                 onComplete={handleComplete}
               />
             );
@@ -38,6 +42,7 @@ export const BlockRenderer = memo(function ({
               <CodeBlock
                 key={block.id}
                 {...block}
+                className={blockStyles.code}
                 onComplete={handleComplete}
               />
             );
@@ -47,6 +52,7 @@ export const BlockRenderer = memo(function ({
               <ListBlock
                 key={block.id}
                 {...block}
+                className={blockStyles.list}
                 onComplete={handleComplete}
               />
             );

@@ -52,6 +52,12 @@ function AssistantMessageComponent({
     <div className={styles.container}>
       <BlockRenderer
         blocks={renderedBlocks}
+        blockStyles={{
+          root: styles.block,
+          text: styles.blocktext,
+          code: styles.blockcode,
+          list: styles.blocklist,
+        }}
         onBlockComplete={appendNextBlock}
       />
     </div>

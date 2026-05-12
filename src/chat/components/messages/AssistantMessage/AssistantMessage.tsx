@@ -1,8 +1,10 @@
 import { memo, useCallback, useEffect, useRef, useState } from "react";
 
-import { BlockRenderer } from "../../../blocks/components/BlockRenderer";
-import type { BlockType } from "../../../blocks/types/block.types";
-import type { Message } from "../../../chat/types/message.types";
+import { BlockRenderer } from "../../../../blocks/components/BlockRenderer";
+import type { BlockType } from "../../../../blocks/types/block.types";
+import type { Message } from "../../../../chat/types/message.types";
+
+import styles from "./AssistantMessage.module.scss";
 
 type AssistantMessageProps = {
   readonly message: Message;
@@ -47,7 +49,7 @@ function AssistantMessageComponent({
   }, [message.blocks]);
 
   return (
-    <div>
+    <div className={styles.container}>
       <BlockRenderer
         blocks={renderedBlocks}
         onBlockComplete={appendNextBlock}

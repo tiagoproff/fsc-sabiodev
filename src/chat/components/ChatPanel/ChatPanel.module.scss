@@ -1,0 +1,36 @@
+.container {
+  background-color: #4f3d66;
+  border: 3px solid #fdb24e;
+  border-radius: 16px;
+  box-shadow: 0 0 16px #ffc265;
+  corner-shape: superellipse(-0.5);
+  display: flex;
+  filter: blur(radius);
+  flex-direction: column;
+  gap: 32px;
+  max-width: 80%;
+  min-height: 30vh;
+  padding: 40px;
+}
+
+/* --- IGNORE --- */
+.ignore-message-assistent {
+  background-color: #695394;
+  border-radius: 16px;
+  color: white;
+  margin: 0 16px;
+  max-width: 80%;
+  padding: 16px;
+}
+
+.ignore-message-user {
+  align-self: flex-end;
+  background-color: #ffbe73;
+  border-radius: 16px;
+  color: #000;
+  margin: 0 16px;
+  max-width: 80%;
+  min-width: 10%;
+  padding: 16px;
+  width: auto;
+}

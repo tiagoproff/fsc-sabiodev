@@ -1,6 +1,8 @@
-import { UserMessage } from "./messages/UserMessage";
-import { AssistantMessage } from "./messages/AssistantMessage";
-import type { Message } from "../types/message.types";
+import { UserMessage } from "../messages/UserMessage";
+import { AssistantMessage } from "../messages/AssistantMessage";
+import type { Message } from "../../types/message.types";
+
+import styles from "./MessageList.module.scss";
 
 type MessageListProps = {
   readonly messages: Message[];
@@ -9,7 +11,7 @@ type MessageListProps = {
 
 export function MessageList({ messages, onComplete }: MessageListProps) {
   return (
-    <div>
+    <div className={styles.container}>
       {messages.map((message) => {
         if (message.role === "user") {
           return <UserMessage key={message.id} message={message} />;

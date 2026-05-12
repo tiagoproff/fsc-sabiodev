@@ -1,11 +1,5 @@
-import { Avatar } from "./avatar/components/Avatar";
-import { ChatPanel } from "./chat/components/ChatPanel";
+import { ChatView } from "./chat/components/ChatView";
 
 export default function App() {
-  return (
-    <main>
-      <Avatar />
-      <ChatPanel />
-    </main>
-  );
+  return <ChatView />;
 }

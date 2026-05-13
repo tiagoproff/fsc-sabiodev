@@ -14,3 +14,27 @@
   margin: 0 auto 20px;
   width: 300px;
 }
+
+@media (width <= 768px) and (orientation: portrait) {
+  .container {
+    flex-direction: column;
+  }
+}
+
+@media (width <= 768px) and (orientation: portrait) and (height <= 900px) {
+  .avatar {
+    height: 260px;
+    width: 230px;
+
+    canvas {
+      height: 260px;
+      width: 230px;
+    }
+  }
+}
+
+@media (width <= 768px) and (orientation: portrait) and (height <= 800px) {
+  .avatar {
+    margin-bottom: 0;
+  }
+}

@@ -6,6 +6,7 @@
   corner-shape: superellipse(-0.5);
   display: flex;
   filter: blur(radius);
+  flex: 1 1 auto;
   flex-direction: column;
   gap: 32px;
   min-height: 30vh;
@@ -83,6 +84,7 @@
     height: 62px;
     justify-content: center;
     margin-right: 0;
+    overflow: hidden;
     padding: 16px;
     position: absolute;
     text-indent: -1000px;

@@ -1,3 +1,11 @@
 .container {
-  /* --- IGNORE --- */
+  align-self: center;
+  margin: auto 0;
+  max-width: 80%;
+}
+
+.avatar {
+  height: 320px;
+  margin: 0 auto 20px;
+  width: 300px;
 }

@@ -10,7 +10,7 @@ export function ChatView() {
     <main className={styles.container}>
       <ChatProvider>
         <AvatarProvider>
-          <Avatar />
+          <Avatar className={styles.avatar} />
           <ChatPanel />
         </AvatarProvider>
       </ChatProvider>

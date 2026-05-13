@@ -10,8 +10,19 @@ export function ChatPanel() {
 
   return (
     <section className={styles.container}>
-      <MessageList messages={messages} onComplete={handleAssistantComplete} />
-      <InputBox onSend={handleSend} onStop={handleStop} />
+      <header className={styles.header}>
+        <h1>SabioDEV</h1>
+      </header>
+      <div className={styles.messages}>
+        <MessageList messages={messages} onComplete={handleAssistantComplete} />
+      </div>
+      <footer className={styles.footer}>
+        <InputBox
+          onSend={handleSend}
+          onStop={handleStop}
+          className={styles.inputbox}
+        />
+      </footer>
     </section>
   );
 }

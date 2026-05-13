@@ -2,7 +2,9 @@ import { useState } from "react";
 
 import { useChat } from "../context/ChatContext";
 
-interface InputBoxProps extends React.HTMLAttributes<HTMLInputElement> {
+interface InputBoxProps extends React.HTMLAttributes<HTMLDivElement> {
+  inputProps?: React.HTMLAttributes<HTMLInputElement>;
+  buttonProps?: React.ButtonHTMLAttributes<HTMLButtonElement>;
   onSend: (text: string) => void;
   onStop(): void;
 }
@@ -10,6 +12,8 @@ interface InputBoxProps extends React.HTMLAttributes<HTMLInputElement> {
 export function InputBox({
   onSend,
   onStop,
+  inputProps,
+  buttonProps,
   ...props
 }: Readonly<InputBoxProps>) {
   const [text, setText] = useState("");
@@ -45,15 +49,15 @@ export function InputBox({
   }
 
   return (
-    <div>
+    <div {...props}>
       <input
         value={text}
         disabled={isDisabled}
         onChange={(event) => setText(event.target.value)}
         onKeyDown={handleKeyDown}
-        {...props}
+        {...inputProps}
       />
-      <button disabled={isDisabled} onClick={handleClick}>
+      <button disabled={isDisabled} onClick={handleClick} {...buttonProps}>
         {buttonLabel}
       </button>
     </div>

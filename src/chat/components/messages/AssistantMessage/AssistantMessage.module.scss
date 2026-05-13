@@ -1,9 +1,11 @@
 .container {
-  border: #695394 3px solid;
+  /* --- IGNORE --- */
 }
 
 .block {
-  margin: 0 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .blocktext {
@@ -12,6 +14,7 @@
   color: white;
   max-width: 80%;
   padding: 16px;
+  text-align: left;
 }
 
 .blockcode {
@@ -20,4 +23,7 @@
 
 .blocklist {
   background-color: #53946b;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }

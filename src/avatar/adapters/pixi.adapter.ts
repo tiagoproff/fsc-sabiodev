@@ -18,7 +18,7 @@ export class PixiAvatarAdapter {
 
       await this.app.init({
         width: 300,
-        height: 300,
+        height: 340,
         backgroundAlpha: 0,
         antialias: true,
         preference: "webgl",
@@ -54,7 +54,7 @@ export class PixiAvatarAdapter {
       // POSITION
       this.spine.x = 150;
       this.spine.y = 280;
-      this.spine.scale.set(0.2);
+      this.spine.scale.set(0.36);
 
       // DEFAULT ANIMATION
       this.spine.state.setAnimation(0, "idle", true);

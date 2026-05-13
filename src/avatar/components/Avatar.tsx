@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 
 import { useAvatar } from "../context/AvatarContext";
 
-export function Avatar() {
+export function Avatar(props: Readonly<React.HTMLAttributes<HTMLDivElement>>) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const avatar = useAvatar();
 
@@ -19,13 +19,5 @@ export function Avatar() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return (
-    <div
-      ref={containerRef}
-      style={{
-        width: 300,
-        height: 300,
-      }}
-    />
-  );
+  return <div ref={containerRef} {...props} />;
 }
